@@ -44,7 +44,7 @@ public class Soporte {
     @Column(nullable = true)
     private int idUsuario;
 
-    @Column(nullable = true) /*le elimino el lenght para evitar inconsistencias del largo del nombre */
+    @Column(nullable = true) /*le elimino el lenght para evitar inconsistencias (como el largo del nombre) */
     private String usuarioAsignado;
 
     @Column(length = 50, nullable = false)

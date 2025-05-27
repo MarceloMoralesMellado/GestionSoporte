@@ -27,8 +27,8 @@ public class SoporteService {
         return soporteRepository.save(soporte);
     }
 
-    public void eliminarSoporte(Long id) {
-        soporteRepository.deleteAll();
+    public void eliminarIdSoporte(int idSoporte) {
+        soporteRepository.deleteById(idSoporte);
     }
 
     public List<Soporte> obtenerTickets() {
@@ -60,6 +60,23 @@ public class SoporteService {
         // Si la repo declara Optional<Seccion> findById(...), hacer:
         Optional<Soporte> opt = soporteRepository.findById(idSoporte);
         return opt.orElse(null);
+    }
+
+    public Soporte editSoporte(Integer idSoporte, Soporte soporte){
+        Optional<Soporte> soporteExistente = soporteRepository.findById(idSoporte);
+        if (soporteExistente.isPresent()) {
+            Soporte soporteActualizado = soporteExistente.get();
+            soporteActualizado.setTituloSoporte(soporte.getTituloSoporte());
+            soporteActualizado.setDescripcionSoporte(soporte.getDescripcionSoporte());
+            soporteActualizado.setEstadoTicket(soporte.getEstadoTicket());
+            soporteActualizado.setCategoriaTicket(soporte.getCategoriaTicket());
+
+           
+
+
+            return soporteRepository.save(soporteActualizado);
+        }
+        return null;
     }
 
     

@@ -49,9 +49,9 @@ public class SoporteController {
         return soporteService.guardarSoporte(soporte);
     }
 
-    @DeleteMapping("/{id}")
-    public void eliminarSoporte(@PathVariable Long id) {
-        soporteService.eliminarSoporte(id);
+    @DeleteMapping("/{idSoporte}")
+    public void eliminarSoporte(@PathVariable int idSoporte) {
+        soporteService.eliminarIdSoporte(idSoporte);
     } 
 
 
@@ -63,6 +63,18 @@ public class SoporteController {
         if(soporteActualizado != null){
             return new ResponseEntity<>(soporteActualizado, HttpStatus.OK);
         }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //falta modificar el ticket
+
+    @PutMapping("/{idSoporte}")
+    public ResponseEntity<Soporte> putSoporte(@PathVariable Integer idSoporte, @RequestBody Soporte soporte) {
+        Soporte actualizado = soporteService.editSoporte(idSoporte, soporte);
+        if (actualizado != null) {
+            return new ResponseEntity<>(actualizado, HttpStatus.OK);
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
